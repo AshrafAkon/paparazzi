@@ -1,0 +1,4 @@
+*.docx diff=zip
+trained.pth filter=lfs diff=lfs merge=lfs -text
+face_detection_yunet_2023mar.onnx filter=lfs diff=lfs merge=lfs -text
+lbfmodel.yaml filter=lfs diff=lfs merge=lfs -text

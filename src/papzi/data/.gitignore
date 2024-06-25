@@ -1,0 +1,7 @@
+
+!.gitignore
+!classes.json
+!models/
+!models/** 
+!posters
+!posters/** 

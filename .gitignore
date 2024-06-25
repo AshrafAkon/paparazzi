@@ -1,0 +1,12 @@
+.env
+.venv
+.vscode
+.cspell
+.DS_Store
+*.pyc
+*.csv
+~$*
+env
+results
+runs
+__pycache__
