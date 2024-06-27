@@ -1,11 +1,8 @@
 import tkinter as tk
 from pathlib import Path
 from tkinter import filedialog, ttk
-from tkinter.font import Font
 
 from PIL import Image, ImageTk
-import comm
-from sympy import expand
 
 from papzi.constants import BASE_DIR
 from papzi_gui.face_recognizer import FaceRecognizer
@@ -129,7 +126,6 @@ class PhotoSelectorApp(tk.Tk):
 
         # Calculations and results
         name = self.recognizer.predict(file_path)
-        films = [f"{i + 1}° Film {i + 1}" for i in range(10)]
 
         # Display the results
         self.actor_name.config(text=name)
@@ -141,7 +137,7 @@ class PhotoSelectorApp(tk.Tk):
 
     def get_films(self, name: str):
         movie_dir = BASE_DIR / "posters" / name / "movie"
-        tv_dir = movie_dir = BASE_DIR / "posters" / name / "tv"
+        tv_dir = BASE_DIR / "posters" / name / "tv"
 
         all_posters = list(movie_dir.iterdir()) + list(tv_dir.iterdir())
         all_films = []
@@ -150,7 +146,8 @@ class PhotoSelectorApp(tk.Tk):
             all_films.append(
                 {"name": name, "rating": rating, "poster": poster}
             )
-        return all_films
+            all_films.sort(key=lambda x: float(x["rating"]), reverse=True)
+        return all_films[:10]
 
     def show_films(self, name: str):
         print(self.film_frame.winfo_height())
@@ -184,7 +181,7 @@ class PhotoSelectorApp(tk.Tk):
         print("films visible")
 
     def on_mouse_wheel(self, event):
-        print("mouse wheelll")
+        print("mouse wheel")
         self.canvas.yview_scroll(int(-1 * (event.delta / 120)), "units")
 
 
