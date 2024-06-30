@@ -138,8 +138,15 @@ class PhotoSelectorApp(tk.Tk):
     def get_films(self, name: str):
         movie_dir = BASE_DIR / "posters" / name / "movie"
         tv_dir = BASE_DIR / "posters" / name / "tv"
-
-        all_posters = list(movie_dir.iterdir()) + list(tv_dir.iterdir())
+        if movie_dir.exists():
+            movie_posters = list(movie_dir.iterdir())
+        else:
+            movie_posters = []
+        if tv_dir.exists():
+            tv_posters = list(tv_dir.iterdir())
+        else:
+            tv_posters = []
+        all_posters = movie_posters + tv_posters
         all_films = []
         for poster in all_posters:
             name, year, rating = poster.name.replace(".jpg", "").split("_")
